@@ -5,6 +5,7 @@ import { MovieCard } from './components/MovieCard';
 
 import { SideBar } from './components/SideBar';
 import { Content } from './components/Content';
+import { Header } from './components/Header';
 
 import { api } from './services/api';
 
@@ -36,7 +37,10 @@ export function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <SideBar selectedGenreId={selectedGenreId} handleClickButton={handleClickButton}/>
-      <Content selectedGenreId={selectedGenreId} selectedGenre={selectedGenre}/>
+      <div className="container">
+        <Header selectedGenre={selectedGenre}/>
+        <Content selectedGenreId={selectedGenreId}/>
+      </div>
     </div>
   )
 }

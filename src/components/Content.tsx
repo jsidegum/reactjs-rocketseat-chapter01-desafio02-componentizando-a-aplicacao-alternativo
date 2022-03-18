@@ -2,12 +2,6 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import { MovieCard } from "./MovieCard";
 
-interface GenreResponseProps {
-  id: number;
-  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
-  title: string;
-}
-
 interface MovieProps {
   imdbID: string;
   Title: string;
@@ -21,10 +15,9 @@ interface MovieProps {
 
 interface contentProps {
   selectedGenreId: number;
-  selectedGenre: GenreResponseProps;
 }
 
-export function Content({selectedGenreId, selectedGenre}:contentProps) {
+export function Content({selectedGenreId}:contentProps) {
 
   useEffect(() => {
     api.get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`).then(response => {
@@ -35,11 +28,6 @@ export function Content({selectedGenreId, selectedGenre}:contentProps) {
   const [movies, setMovies] = useState<MovieProps[]>([]);
 
   return(
-    <div className="container">
-    <header>
-      <span className="category">Categoria:<span> {selectedGenre.title}</span></span>
-    </header>
-
     <main>
       <div className="movies-list">
         {movies.map(movie => (
@@ -47,6 +35,5 @@ export function Content({selectedGenreId, selectedGenre}:contentProps) {
         ))}
       </div>
     </main>
-  </div>
   )
 }
